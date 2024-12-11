@@ -17,7 +17,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 420vh;
+    height: 450vh;
   }
   .gradient-background {
     position: fixed;
@@ -80,7 +80,7 @@
     z-index: 1;
     max-width: 1000px;
     padding: 20px;
-    margin-top: 160px; 
+    margin-top: 180px; 
   }
   header p{
     font-size: 1.2rem;
