@@ -7,19 +7,30 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
-// Moving gradient effect
+// Moving gradient effect (mouse, pen and touch)
 const gradientBackground = document.querySelector(".gradient-background");
+let ticking = false;
+let px = 50;
+let py = 50;
 
-document.addEventListener("mousemove", (e) => {
-  const { clientX, clientY } = e;
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
+function applyGradient() {
+  gradientBackground.style.setProperty("--x", px + "%");
+  gradientBackground.style.setProperty("--y", py + "%");
+  ticking = false;
+}
 
-  const xPercentage = (clientX / screenWidth) * 100;
-  const yPercentage = (clientY / screenHeight) * 100;
+function moveGradient(clientX, clientY) {
+  px = (clientX / window.innerWidth) * 100;
+  py = (clientY / window.innerHeight) * 100;
+  if (!ticking) {
+    ticking = true;
+    requestAnimationFrame(applyGradient);
+  }
+}
 
-  gradientBackground.style.background = `
-    radial-gradient(circle at ${xPercentage}% ${yPercentage}%, 
-    hsla(217.85,28.38%,44.9%,1) 0%, rgba(255, 255, 255, 0.3) 30%)
-  `;
-});
+document.addEventListener("mousemove", (e) => moveGradient(e.clientX, e.clientY), { passive: true });
+
+document.addEventListener("touchmove", (e) => {
+  const t = e.touches[0];
+  if (t) moveGradient(t.clientX, t.clientY);
+}, { passive: true });

@@ -1,124 +1,165 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Montserrat', Arial, sans-serif;
-    overflow-y: auto;
-    margin: 0;
-    color: #333;
-    position: relative;
-    background-color: #f3f3f3;
-  }
-  .container{
-    display: flex;
-    justify-content: center;
-    padding-left: 50px;
-    align-items: center;
-    height: 450vh;
-  }
-  .gradient-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 50%, hsla(217.85,28.38%,44.9%,1) 0%, rgba(255, 255, 255, 0.3) 30%);
-    transition: background-position 0.1s, background-size 0.1s;
-    z-index: -1;
-  }
-  
-  /* Menu Bar */
-  .menu-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgba(255, 255, 255, 0.5); 
-    padding: 0 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid #ddd;
-    z-index: 10;
-  }
-  
-  .menu-bar .logo {
-    font-size: 1.5rem;
-    font-weight: 600; 
-    color: #333;
-  }
-  
-  .menu-items {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .menu-items li {
-    font-size: 1rem;
-  }
-  
-  .menu-items a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 400; 
-    transition: color 0.3s;
-  }
-  
-  .menu-items a:hover {
-    color: #007acc;
-  }
-  
-  /* Header Content */
-  header {
-    text-align: left;
-    z-index: 1;
-    max-width: 1000px;
-    padding: 20px;
-    margin-top: 180px; 
-  }
-  header p{
-    font-size: 1.2rem;
-  }
-  header h1 {
-    font-size: 7rem;
-    font-weight: 550; 
-    margin-bottom: 100px;
-    margin-top: 70px;
-  }
-  
-  .details {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    font-weight: 400; 
-  }
-  
-  #experience{
-    margin-top: 160px;
-    margin-bottom: 160px;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  color: #333;
+  position: relative;
+  background-color: #f3f3f3;
+  overflow-wrap: break-word;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Anchor targets sit below the fixed menu bar */
+#details, #experience, #projects, #achievements {
+  scroll-margin-top: 80px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  padding-left: clamp(0px, 3.5vw, 50px);
+  /* room for the fixed footer */
+  padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+}
+
+.gradient-background {
+  --x: 50%;
+  --y: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x) var(--y), hsla(217.85,28.38%,44.9%,1) 0%, rgba(255, 255, 255, 0.3) 30%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Menu Bar */
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0 max(20px, env(safe-area-inset-right, 0px)) 0 max(20px, env(safe-area-inset-left, 0px));
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #ddd;
+  z-index: 10;
+}
+
+.menu-bar .logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+
+.menu-items {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu-items li {
+  font-size: 1rem;
+}
+
+.menu-items a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 400;
+  transition: color 0.3s;
+  display: inline-block;
+  padding: 8px 0;
+}
+
+.menu-items a:hover {
+  color: #007acc;
+}
+
+/* Header Content */
+header {
+  text-align: left;
+  z-index: 1;
+  width: 100%;
+  max-width: 1000px;
+  padding: 20px;
+  margin-top: clamp(100px, 14vw, 180px);
+}
+
+header p {
+  font-size: 1.2rem;
+}
+
+header h1 {
+  font-size: clamp(2.6rem, 9vw, 7rem);
+  line-height: 1.1;
+  font-weight: 550;
+  margin-bottom: clamp(40px, 8vw, 100px);
+  margin-top: clamp(30px, 5.5vw, 70px);
+}
+
+.details {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+#experience {
+  margin-top: clamp(80px, 12vw, 160px);
+  margin-bottom: clamp(80px, 12vw, 160px);
+}
+
+h2 {
+  font-size: 2rem;
+}
+
 /* Work Entry Styling */
 .work-entry {
-  display: flex; 
+  display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
 .company-logo {
-  width: 160px; 
-  height: 160px;
-  object-fit: contain; 
-  margin-right: 20px; 
+  width: clamp(70px, 16vw, 160px);
+  height: clamp(70px, 16vw, 160px);
+  flex-shrink: 0;
+  object-fit: contain;
+  margin-right: 20px;
 }
 
 .work-info {
-  flex: 1; 
+  flex: 1;
+  min-width: 0;
 }
 
 .work-info h3 {
@@ -138,10 +179,10 @@
   color: #555;
 }
 
-  /* Project Section */
+/* Project Section */
 #projects {
-  margin-top: 160px;
-  margin-bottom: 160px;
+  margin-top: clamp(80px, 12vw, 160px);
+  margin-bottom: clamp(80px, 12vw, 160px);
   text-align: left;
 }
 
@@ -160,8 +201,13 @@
 .project-image {
   width: 80px;
   height: auto;
+  flex-shrink: 0;
   border-radius: 8px;
   margin-right: 20px;
+}
+
+.project-details {
+  min-width: 0;
 }
 
 .project-details h3 {
@@ -177,10 +223,13 @@
 
 .project-link {
   margin-left: auto;
+  padding-left: 12px;
+  flex-shrink: 0;
 }
 
 .arrow-link {
   font-size: 2.5rem;
+  line-height: 1.2;
   text-decoration: none;
   color: #333;
   border: 1px solid #333;
@@ -194,10 +243,10 @@
   background-color: #333;
   color: #fff;
 }
+
 /* Achievements Section */
 #achievements {
-  margin: 40px 20px;
-  margin-bottom: 70px;
+  margin: 40px 20px 70px;
   text-align: left;
 }
 
@@ -228,31 +277,28 @@
   color: #555;
 }
 
-hr {
-  border: none;
-  border-top: 1px solid #ddd;
-  margin: 20px 0;
-}
-
 /* Footer Section */
 footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%; 
-  background-color: rgba(255, 255, 255, 0.5); 
-  padding: 10px 20px;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px 20px calc(10px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
   border-top: 1px solid #ddd;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   z-index: 10;
 }
 
 .footer-links {
   display: flex;
-  gap: 15px; 
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px 15px;
   margin-bottom: 5px;
 }
 
@@ -264,7 +310,7 @@ footer {
 }
 
 .footer-links a:hover {
-  color: #007BFF; 
+  color: #007BFF;
 }
 
 footer p {
@@ -272,11 +318,77 @@ footer p {
   color: #777;
 }
 
-  hr {
-    border: none;
-    height: 1px; 
-    width: 600px;
-    background-color: #292828;
-    margin: 30px 0;
+/* Divider (same look as before, never wider than the screen) */
+hr {
+  border: none;
+  height: 1px;
+  width: min(600px, 100%);
+  background-color: #292828;
+  margin: 30px 0;
+}
+
+/* ---------- Tablets ---------- */
+@media (max-width: 900px) {
+  header p,
+  .details { font-size: 1.1rem; }
+  .work-info h3,
+  .project-details h3,
+  .achievement-entry h3 { font-size: 1.3rem; }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 600px) {
+  .menu-bar { padding-left: 14px; padding-right: 14px; }
+  .menu-bar .logo { font-size: 1.1rem; }
+  .menu-items { gap: 12px; }
+  .menu-items li { font-size: 0.85rem; }
+
+  .container { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+  header { padding: 16px; }
+  header p,
+  .details { font-size: 1rem; }
+  h2,
+  #projects h2,
+  #achievements h2 { font-size: 1.6rem; }
+
+  hr { margin: 22px 0; }
+
+  .work-info h3,
+  .project-details h3,
+  .achievement-entry h3 { font-size: 1.1rem; }
+  .work-info .description,
+  .project-details p,
+  .achievement-entry .description { font-size: 0.9rem; }
+
+  .company-logo { margin-right: 14px; }
+  .project-image { width: 56px; margin-right: 12px; }
+  .arrow-link {
+    font-size: 1.6rem;
+    padding: 6px 14px;
   }
-  
+
+  #achievements { margin: 30px 0 50px; }
+
+  footer { padding-left: 12px; padding-right: 12px; }
+  .footer-links { gap: 4px 12px; }
+  .footer-links a { font-size: 0.9rem; }
+  footer p { font-size: 0.8rem; }
+}
+
+/* ---------- Very small phones ---------- */
+@media (max-width: 360px) {
+  .menu-bar .logo { font-size: 1rem; }
+  .menu-items { gap: 9px; }
+  .menu-items li { font-size: 0.78rem; }
+  .project-image { width: 44px; }
+}
+
+/* ---------- Short landscape phones ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  header { margin-top: 90px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
